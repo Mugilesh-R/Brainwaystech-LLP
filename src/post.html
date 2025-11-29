@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog Post — ZapCorp</title>
+  <meta name="description" content="Read our latest insights, news, and updates from ZapCorp." />
+  <link rel="stylesheet" href="/src/assets/css/styles.css" />
+  <link rel="icon" href="/public/favicon.ico" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar glass">
+    <div class="container topbar-inner">
+      <a href="/" class="brand">
+        <img src="/public/images/logo.png" alt="ZapCorp" class="logo" />
+        <span>ZapCorp</span>
+      </a>
+
+      <nav class="nav">
+        <a href="/src/about.html">About</a>
+        <a href="/src/services.html">Services</a>
+        <a href="/src/blog.html" class="cta active">Blog</a>
+        <a href="/src/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero glass" style="padding:50px 20px;text-align:center;">
+      <h1 id="post-title">Blog Post Title</h1>
+      <p class="lead" id="post-date">Published on January 1, 2025</p>
+    </section>
+
+    <!-- BLOG POST CONTENT -->
+    <section class="container" style="margin-top:40px;">
+      <div class="glass" style="padding:30px;border-radius:20px;max-width:800px;margin:auto;">
+        <img id="post-image" src="/public/images/sample-post.jpg" alt="Blog Image" style="width:100%;border-radius:12px;margin-bottom:20px;">
+
+        <div id="post-content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod sapien vel ligula facilisis, eget consectetur urna porta.</p>
+          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus efficitur volutpat purus.</p>
+          <p>Integer vel elit ac lectus bibendum ultricies sit amet et augue. Sed viverra luctus lorem vitae consequat.</p>
+        </div>
+
+        <a href="/src/blog.html" style="display:inline-block;margin-top:20px;color:#FFD700;">← Back to Blog</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer glass" style="margin-top:40px;padding:20px;">
+    <div class="container" style="text-align:center;">
+      <p class="muted">© ZapCorp — Intelligent IT Solutions</p>
+    </div>
+  </footer>
+
+  <script src="/src/assets/js/main.js" defer></script>
+
+  <script>
+    // Optional: Dynamic blog loading example
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id');
+
+    if(postId) {
+      fetch(`/api/posts/${postId}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('post-title').textContent = data.title;
+          document.getElementById('post-date').textContent = 'Published on ' + data.date;
+          document.getElementById('post-image').src = data.image;
+          document.getElementById('post-content').innerHTML = data.content;
+        })
+        .catch(err => console.error('Error loading post:', err));
+    }
+  </script>
+
+</body>
+</html>
